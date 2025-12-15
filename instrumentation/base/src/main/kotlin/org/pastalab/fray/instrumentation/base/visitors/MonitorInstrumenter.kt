@@ -38,6 +38,7 @@ class MonitorInstrumenter(cv: ClassVisitor) : ClassVisitor(ASM9, cv) {
           if (opcode == Opcodes.MONITORENTER) {
             super.visitInsn(Opcodes.DUP)
             super.visitLdcInsn(LINEINFO.klassName)
+            super.visitLdcInsn(LINEINFO.lyne)
             super.visitMethodInsn(
                 Opcodes.INVOKESTATIC,
                 org.pastalab.fray.runtime.Runtime::class.java.name.replace(".", "/"),

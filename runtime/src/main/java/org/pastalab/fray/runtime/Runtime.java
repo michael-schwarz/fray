@@ -156,7 +156,7 @@ public class Runtime {
         LOCK_DELEGATE.onStaticFieldWrite(owner, name, descriptor);
     }
 
-    public static void onMonitorEnter(Object o, String i) {
+    public static void onMonitorEnter(Object o, String klass, int line) {
         cnt++;
 
         LOCK_DELEGATE.onMonitorEnter(o);
