@@ -13,6 +13,7 @@ import org.pastalab.fray.instrumentation.base.visitors.ArrayOperationInstrumente
 import org.pastalab.fray.instrumentation.base.visitors.ClassConstructorInstrumenter
 import org.pastalab.fray.instrumentation.base.visitors.ClassVersionInstrumenter
 import org.pastalab.fray.instrumentation.base.visitors.ConditionInstrumenter
+import org.pastalab.fray.instrumentation.base.visitors.LineClassVisitor
 import org.pastalab.fray.instrumentation.base.visitors.LoadClassInstrumenter
 import org.pastalab.fray.instrumentation.base.visitors.MonitorInstrumenter
 import org.pastalab.fray.instrumentation.base.visitors.ObjectNotifyInstrumenter
@@ -48,7 +49,8 @@ class ApplicationCodeTransformer(val interleaveAllMemoryOps: Boolean = false) :
       }
       val classReader = ClassReader(classfileBuffer)
       val cn = ClassNode()
-      var cv: ClassVisitor = ObjectNotifyInstrumenter(cn)
+      var cv: ClassVisitor = LineClassVisitor(cn)
+      cv = ObjectNotifyInstrumenter(cv)
       cv = TargetExitInstrumenter(cv)
       cv = TimedWaitInstrumenter(cv)
       cv = VolatileFieldsInstrumenter(cv, false, interleaveAllMemoryOps)
