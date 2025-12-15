@@ -37,6 +37,7 @@ class MonitorInstrumenter(cv: ClassVisitor) : ClassVisitor(ASM9, cv) {
         if (opcode == Opcodes.MONITORENTER || opcode == Opcodes.MONITOREXIT) {
           if (opcode == Opcodes.MONITORENTER) {
             super.visitInsn(Opcodes.DUP)
+            super.visitLdcInsn(LINEINFO.klassName)
             super.visitMethodInsn(
                 Opcodes.INVOKESTATIC,
                 org.pastalab.fray.runtime.Runtime::class.java.name.replace(".", "/"),
@@ -48,6 +49,7 @@ class MonitorInstrumenter(cv: ClassVisitor) : ClassVisitor(ASM9, cv) {
           } else {
             super.visitInsn(Opcodes.DUP)
             super.visitInsn(Opcodes.DUP)
+            println("Doing stuff in MONITOREXIT ${ LINEINFO.klassName }: ${LINEINFO.lyne}")
             super.visitMethodInsn(
                 Opcodes.INVOKESTATIC,
                 org.pastalab.fray.runtime.Runtime::class.java.name.replace(".", "/"),

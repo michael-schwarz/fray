@@ -22,6 +22,7 @@ import java.util.concurrent.locks.StampedLock;
 
 // No recursion is allowed in Runtime
 public class Runtime {
+    public static int cnt = 0;
     public static Delegate LOCK_DELEGATE = new Delegate();
     public static NetworkDelegate NETWORK_DELEGATE = new NetworkDelegate();
 
@@ -155,7 +156,9 @@ public class Runtime {
         LOCK_DELEGATE.onStaticFieldWrite(owner, name, descriptor);
     }
 
-    public static void onMonitorEnter(Object o) {
+    public static void onMonitorEnter(Object o, String i) {
+        cnt++;
+
         LOCK_DELEGATE.onMonitorEnter(o);
     }
 
@@ -168,6 +171,7 @@ public class Runtime {
     }
 
     public static void onExit(int code) {
+        System.out.println("Cnt is " + cnt);
         LOCK_DELEGATE.onExit(code);
     }
 
@@ -196,6 +200,7 @@ public class Runtime {
     }
 
     public static void onMainExit() {
+        System.out.println("Cnt is " + cnt);
         LOCK_DELEGATE.onMainExit();
     }
 

@@ -39,7 +39,7 @@ object RuntimeDescriptors {
               "(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
           "onStaticFieldRead" to "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
           "onStaticFieldWrite" to "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
-          "onMonitorEnter" to "(Ljava/lang/Object;)V",
+          "onMonitorEnter" to "(Ljava/lang/Object;Ljava/lang/String;)V",
           "onMonitorExit" to "(Ljava/lang/Object;)V",
           "onMonitorExitDone" to "(Ljava/lang/Object;)V",
           "onExit" to "(I)V",

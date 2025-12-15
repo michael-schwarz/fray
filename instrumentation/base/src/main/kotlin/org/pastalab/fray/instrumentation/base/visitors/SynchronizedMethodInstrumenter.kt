@@ -58,6 +58,7 @@ class SynchronizedMethodInstrumenter(cv: ClassVisitor, private val instrumenting
           loadThis()
         }
         dup()
+        super.visitLdcInsn(LINEINFO.klassName)
         super.visitMethodInsn(
             INVOKESTATIC,
             org.pastalab.fray.runtime.Runtime::class.java.name.replace(".", "/"),
