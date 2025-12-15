@@ -28,7 +28,6 @@ dokka {
 tasks { wrapper { gradleVersion = "9.0.0" } }
 
 allprojects {
-  plugins.apply("com.ncorti.ktfmt.gradle")
   plugins.apply("base")
   base.archivesName =
       "${rootProject.name}-" + project.path.replaceFirst("^:".toRegex(), "").replace(':', '-')
